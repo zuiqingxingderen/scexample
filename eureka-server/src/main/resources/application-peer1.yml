@@ -2,8 +2,18 @@ server:
   port: 8761
 
 eureka:
+  server:
+    enableSelfPreservation: false
+    ##设为false，关闭自我保护主要
+    evictionIntervalTimerInMs: 4000
+    ##清理间隔（单位毫秒，默认是60*1000）
   instance:
     hostname: peer1
+    leaseRenewalIntervalInSeconds: 1
+    ##租期更新时间间隔（默认30秒）
+    leaseExpirationDurationInSeconds: 2
+    ##租期到期时间（默认90秒）
+    prefer-ip-address: true
   client:
     service-url:
       #设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
